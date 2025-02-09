@@ -62,7 +62,7 @@ export default function Profile() {
 
   return (
     <div>
-      <h2>Profile, {user?.fullName}</h2>
+      <h2>Hi, I am in the profile, {user?.fullName}</h2>
       {user ? (
         <>
           {!isLoaded ? (
