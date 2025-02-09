@@ -1,3 +1,3 @@
-export default function Chat({ receivedId }: { receivedId: string }) {
+export default function Chat() {
   return <div>Chat</div>;
 }

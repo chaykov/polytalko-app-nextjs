@@ -2,6 +2,7 @@
 
 import { api } from "@/convex/_generated/api";
 import { toast } from "@/hooks/use-toast";
+import { FriendRelationship } from "@/types/FriendRelationship";
 import { useUser } from "@clerk/nextjs";
 import { useMutation, useQuery } from "convex/react";
 import { useEffect } from "react";
@@ -10,21 +11,21 @@ export default function UserFriends() {
   const { user } = useUser();
   const userId = user?.id;
 
-  const incomingRequests = useQuery(
-    api.queries.getIncomingFriendRequests.getIncomingFriendRequests,
-    { userId: userId || "" }
-  );
+  const incomingRequests: FriendRelationship[] =
+    useQuery(api.queries.getIncomingFriendRequests.getIncomingFriendRequests, {
+      userId: userId || "",
+    }) ?? [];
 
-  const acceptedFriends = useQuery(
-    api.queries.getAcceptedFriends.getAcceptedFriends,
-    { userId: userId || "" }
-  );
+  const acceptedFriends: FriendRelationship[] =
+    useQuery(api.queries.getAcceptedFriends.getAcceptedFriends, {
+      userId: userId || "",
+    }) ?? [];
 
   const acceptFriend = useMutation(api.mutations.acceptFriend.acceptFriend);
 
   // Obsługa akceptowania zaproszenia
-  const handdleAccept = async (request: any) => {
-    if (!userId) return;
+  const handleAccept = async (request: FriendRelationship) => {
+    if (!userId || !request.friendId) return;
 
     try {
       await acceptFriend({ userId, friendId: request.userId });
@@ -41,9 +42,6 @@ export default function UserFriends() {
 
   if (!user) return <p>Please log in to view friend requests.</p>;
 
-  //   const loadingFriends = friends === undefined;
-  const loadingFriends = true;
-  const friends = [];
   return (
     <div className="p-4 border shadow-md rounded-lg mt-4">
       <h2 className="text-lg font-bold">Friend requests and friends</h2>
@@ -56,12 +54,12 @@ export default function UserFriends() {
         <p>No incoming friend requests.</p>
       ) : (
         <ul>
-          {incomingRequests.map((request: any) => (
+          {incomingRequests.map((request) => (
             <li key={request._id} className="flex items-center gap-2">
               <span>From: {request.userId}</span>
               <button
                 className="bg-green-500 text-white px-2 pt-1"
-                onClick={() => handdleAccept(request)}
+                onClick={() => handleAccept(request)}
               >
                 Accept
               </button>
@@ -78,7 +76,7 @@ export default function UserFriends() {
         <p>You have no friends yet.</p>
       ) : (
         <ul>
-          {acceptedFriends.map((friend: any) => {
+          {acceptedFriends.map((friend) => {
             const friendDisplay =
               friend.userId === userId ? friend.friendId : friend.userId;
             return (

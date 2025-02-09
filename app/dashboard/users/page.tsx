@@ -3,10 +3,10 @@
 // Utils
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
+import AllUserList from "./_components/AllUserList";
+import UserFriends from "./_components/UserFriends";
 
 // Komponenty
-import AllUserList from "./components/AllUserList";
-import UserFriends from "./components/UserFriends";
 
 export default function Users() {
   const users = useQuery(api.getUsers.getUsers) || [];

@@ -1,3 +1,5 @@
+"use client";
+
 import { useUser } from "@clerk/nextjs";
 import { useAuth } from "@clerk/nextjs";
 import LogoutButton from "../../_components/LogoutButton";

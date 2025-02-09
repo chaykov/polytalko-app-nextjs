@@ -1,6 +1,6 @@
 "use client";
 
-import { SignedOut, SignInButton, useUser } from "@clerk/nextjs";
+import { SignInButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 
 import { ChevronRightIcon } from "@heroicons/react/16/solid";
@@ -46,7 +46,7 @@ export default function Home() {
           <div className="mt-24 sm:mt-32 lg:mt-16">
             <a href="#" className="inline-flex space-x-6">
               <span className="rounded-full bg-indigo-600/10 px-3 py-1 text-sm/6 text-indigo-600 ring-1 ring-indigo-600/10 ring-inset">
-                What's new
+                What&apos;s new
               </span>
               <span className="inline-flex items-center space-x-2 text-sm/6 font-medium text-gray-600">
                 <span>Launched a version alpha</span>
@@ -63,7 +63,7 @@ export default function Home() {
           <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
             PolyTalko is a platform that connects people from all over the
             world, enabling language exchange and cultural discovery in a
-            friendly and welcoming environment. Whether you're looking to
+            friendly and welcoming environment. Whether you&apos;re looking to
             improve your language skills, make new friends, or simply explore
             different cultures – PolyTalko is the perfect place for you!
           </p>

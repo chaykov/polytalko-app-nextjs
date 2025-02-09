@@ -1,3 +1,5 @@
+"use client";
+
 import { api } from "@/convex/_generated/api";
 import { toast } from "@/hooks/use-toast";
 import { useUser } from "@clerk/nextjs";
@@ -23,6 +25,7 @@ export default function AddFriendButtonStatus({
       await addFriend({ userId, friendId });
     } catch (error) {
       toast({ description: "Error adding friend", variant: "destructive" });
+      console.error("Error adding friend:", error);
     }
   };
 
