@@ -31,6 +31,7 @@ export default function UserFriends() {
       await acceptFriend({ userId, friendId: request.userId });
     } catch (error) {
       toast({ description: "Error accepting friend:", variant: "destructive" });
+      console.error("Error accepting friend", error);
     }
   };
 
