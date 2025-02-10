@@ -5,7 +5,6 @@ import Link from "next/link";
 
 import { ChevronRightIcon } from "@heroicons/react/16/solid";
 import Image from "next/image";
-import LogoutButton from "../dashboard/_components/LogoutButton";
 
 export default function Home() {
   const { user, isSignedIn } = useUser();
@@ -88,7 +87,7 @@ export default function Home() {
                     Go to the dashboard page
                   </button>
                 </Link>
-                <LogoutButton userId={user.id} />
+                {/* <LogoutButton userId={user.id} /> */}
               </>
             )}
           </div>

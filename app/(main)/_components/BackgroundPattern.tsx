@@ -1,4 +1,19 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 export default function BackgroundPattern() {
+  const [offsetY, setOffsetY] = useState(0);
+
+  const handleScroll = () => {
+    setOffsetY(window.scrollY * 0.3);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div
       className="absolute inset-0 -z-10 h-full bg-transparent mix-blend-overlay backdrop-blur-sm 
@@ -6,6 +21,7 @@ export default function BackgroundPattern() {
                   bg-[size:6rem_4rem] 
                   [mask-image:linear-gradient(to_bottom_left,white,transparent)] 
                   [-webkit-mask-image:linear-gradient(to_bottom_left,white,transparent)]"
+      style={{ backgroundPosition: `0px ${offsetY}px` }}
     />
   );
 }

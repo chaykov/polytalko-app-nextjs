@@ -9,17 +9,17 @@ export default function Home() {
           <h1 className="text-7xl md:text-[92px] font-bold text-white mb-12">
             PolyTalko
           </h1>
-          <h2 className="text-balance text-2xl font-semibold tracking-tight text-white sm:text-5xl">
+          <h2 className="text-balance font-semibold tracking-tight text-white text-4xl md:text-5xl">
             Get some new friends from all over the world.
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-pretty text-lg/8 text-indigo-200">
+          <p className="mx-auto mt-6 max-w-sm md:max-w-xl text-pretty text-md/8 md:text-lg/8 text-indigo-200">
             🌍 PolyTalko – where the world connects! Want to sharpen your
             language skills, meet people from different cultures, and make new
             friends? 🚀 PolyTalko is a vibrant space full of positive energy
             where you can learn, share experiences, and have a great time. Join
             us and explore the world together! 🌏✨
           </p>
-          <div className="mt-10 flex items-center justify-center gap-x-6">
+          <div className="mt-6 md:mt-10 flex items-center justify-center gap-x-6">
             <a
               href="#"
               className="bg-white px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
