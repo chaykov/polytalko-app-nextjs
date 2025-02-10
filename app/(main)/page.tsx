@@ -5,9 +5,11 @@ export default function Home() {
     <div className="relative isolate overflow-hidden bg-gradient-to-br from-indigo-700 to-indigo-900 h-screen">
       <BackgroundPattern />
       <div className="flex items-center min-h-full justify-center flex-col">
-        <div className="mx-auto max-w-2xl text-center">
-          <h1 className="text-7xl text-white mb-12">PolyTalko</h1>
-          <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+        <div className="mx-auto max-w-2xl text-center p-12 sm:p-2">
+          <h1 className="text-7xl md:text-[92px] font-bold text-white mb-12">
+            PolyTalko
+          </h1>
+          <h2 className="text-balance text-2xl font-semibold tracking-tight text-white sm:text-5xl">
             Get some new friends from all over the world.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-pretty text-lg/8 text-indigo-200">
