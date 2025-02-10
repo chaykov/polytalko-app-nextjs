@@ -5,7 +5,7 @@ export default function Home() {
     <div className="relative isolate overflow-hidden bg-gradient-to-br from-indigo-700 to-indigo-900 h-screen">
       <BackgroundPattern />
       <div className="flex items-center min-h-full justify-center flex-col">
-        <div className="mx-auto max-w-2xl text-center p-12 sm:p-2">
+        <div className="mx-auto max-w-2xl text-center p-6 sm:p-12">
           <h1 className="text-7xl md:text-[92px] font-bold text-white mb-12">
             PolyTalko
           </h1>
