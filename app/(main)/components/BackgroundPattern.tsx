@@ -1,15 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React from "react";
 
 export default function BackgroundPattern() {
-  const [offsetY, setOffsetY] = useState(0);
+  const [offsetY, setOffsetY] = React.useState(0);
 
   const handleScroll = () => {
     setOffsetY(window.scrollY * 0.3);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);

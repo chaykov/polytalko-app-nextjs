@@ -37,7 +37,9 @@ export default function AllUserList({ users }: UserListProps) {
   );
 
   // Pobieranie wszsytkich uzytkownikow (pozostalych) - przykladowo
-  const getAllUsers = useQuery(api.getUsers.getUsers, {});
+  const getAllUsers = useQuery(api.queries.getAllUsers, {
+    userId: userId || "",
+  });
 
   // Funkcja, ktora dla danego friendId zwraca status relacji, jesli istnieje
   const getRelationshipStatus = (

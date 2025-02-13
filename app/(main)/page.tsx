@@ -1,6 +1,13 @@
-import BackgroundPattern from "./_components/BackgroundPattern";
+"use client";
+
+import { SignInButton, useUser } from "@clerk/nextjs";
+import BackgroundPattern from "./components/BackgroundPattern";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const { isSignedIn } = useUser();
+  const router = useRouter();
+
   return (
     <div className="relative isolate overflow-hidden bg-gradient-to-br from-indigo-700 to-indigo-900 h-screen">
       <BackgroundPattern />
@@ -20,15 +27,27 @@ export default function Home() {
             us and explore the world together! 🌏✨
           </p>
           <div className="mt-6 md:mt-10 flex items-center justify-center gap-x-6">
-            <a
-              href="#"
-              className="bg-white px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              Get started
-            </a>
-            <a href="#" className="text-sm/6 font-semibold text-white">
+            {!isSignedIn ? (
+              <SignInButton
+                mode="modal"
+                fallbackRedirectUrl={"/dashboard"}
+                forceRedirectUrl={"/dashboard"}
+              >
+                <button className="bg-white px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                  Get started
+                </button>
+              </SignInButton>
+            ) : (
+              <button
+                onClick={() => router.push("/dashboard")}
+                className="bg-white px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Go to Dashboard
+              </button>
+            )}
+            <button className="text-sm/6 font-semibold text-white">
               Learn more <span aria-hidden="true">&#8594;</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>

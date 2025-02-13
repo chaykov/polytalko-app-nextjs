@@ -4,18 +4,24 @@ import { v } from "convex/values";
 export default defineSchema({
   users: defineTable({
     userId: v.string(),
-    name: v.optional(v.string()),
-    email: v.optional(v.string()),
+    name: v.string(),
+    email: v.string(),
+    isOnline: v.boolean(),
+    createdAt: v.float64(),
+
+    sessionId: v.optional(v.string()),
     country: v.optional(v.string()),
     age: v.optional(v.number()),
     description: v.optional(v.string()),
-    createdAt: v.number(), // Timestamp
-  }).index("by_userId", ["userId"]),
+  })
+    .index("by_userId", ["userId"])
+    .index("by_email", ["email"])
+    .index("by_sessionId", ["sessionId"]),
 
   friends: defineTable({
     userId: v.string(),
     friendId: v.string(),
-    status: v.union(v.literal("pending"), v.literal("accepted")),
-    createdAt: v.number(),
-  }).index("by_userId", ["userId"]),
+    status: v.string(),
+    createdAt: v.float64(),
+  }).index("by_userId", ["userId", "friendId"]),
 });

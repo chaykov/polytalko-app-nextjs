@@ -3,22 +3,22 @@
 import { api } from "@/convex/_generated/api";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { useMutation } from "convex/react";
-import { useEffect } from "react";
+import React from "react";
 
 export default function UserProvider() {
   const { isSignedIn, user } = useUser();
   const { sessionId } = useAuth();
 
-  const saveUser = useMutation(api.mutations.saveUser);
+  const saveUser = useMutation(api.mutations.users.createNewUser);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isSignedIn && user && sessionId) {
       saveUser({
         userId: user.id,
         name: user.fullName || "Anonim",
         email: user.primaryEmailAddress?.emailAddress || "",
-        isOnline: true,
-        sessionId,
+        // isOnline: true,
+        // sessionId,
       });
 
       console.log("Zapisany user saveUser");

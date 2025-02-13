@@ -13,14 +13,9 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
-import type * as api_ from "../api.js";
-import type * as getUsers from "../getUsers.js";
-import type * as logout from "../logout.js";
-import type * as mutations_acceptFriend from "../mutations/acceptFriend.js";
-import type * as mutations from "../mutations.js";
-import type * as queries_getAcceptedFriends from "../queries/getAcceptedFriends.js";
-import type * as queries_getIncomingFriendRequests from "../queries/getIncomingFriendRequests.js";
-import type * as query from "../query.js";
+import type * as mutations_users from "../mutations/users.js";
+import type * as types_friends from "../types/friends.js";
+import type * as types_users from "../types/users.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -31,14 +26,9 @@ import type * as query from "../query.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
-  api: typeof api_;
-  getUsers: typeof getUsers;
-  logout: typeof logout;
-  "mutations/acceptFriend": typeof mutations_acceptFriend;
-  mutations: typeof mutations;
-  "queries/getAcceptedFriends": typeof queries_getAcceptedFriends;
-  "queries/getIncomingFriendRequests": typeof queries_getIncomingFriendRequests;
-  query: typeof query;
+  "mutations/users": typeof mutations_users;
+  "types/friends": typeof types_friends;
+  "types/users": typeof types_users;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
