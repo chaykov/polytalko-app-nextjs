@@ -14,8 +14,7 @@ export function ConvexClientProvider({
   return (
     <ClerkProvider
       signInFallbackRedirectUrl="/dashboard"
-      signUpFallbackRedirectUrl="/"
-      afterSignOutUrl="/"
+      signUpFallbackRedirectUrl="/dashboard"
     >
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         {children}

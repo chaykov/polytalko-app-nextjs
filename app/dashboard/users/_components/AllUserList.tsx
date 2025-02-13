@@ -10,7 +10,7 @@ import AddFriendButtonStatus from "./AddFriendStatusButton";
 interface UserListProps {
   users: Array<{
     userId: string;
-    isOnline: boolean;
+    // isOnline: boolean;
     name: string;
     email: string;
     age?: number;
@@ -37,7 +37,7 @@ export default function AllUserList({ users }: UserListProps) {
   );
 
   // Pobieranie wszsytkich uzytkownikow (pozostalych) - przykladowo
-  const getAllUsers = useQuery(api.queries.getAllUsers, {
+  const getAllUsers = useQuery(api.queries.users.getAllUsers, {
     userId: userId || "",
   });
 
@@ -46,14 +46,14 @@ export default function AllUserList({ users }: UserListProps) {
     friendId: string
   ): "pending" | "accepted" | undefined => {
     // sprawdz, czy w pendingRequests jest rekord, gdzie friendId odpowiada wyslanemu zaproszeniu
-    if (pendingRequests?.some((req) => req.userId === friendId)) {
+    if (pendingRequests?.some((req: any) => req.userId === friendId)) {
       return "pending";
     }
 
     // sprawdz czy w acceptedFriends jest rekord, gdize zapytanie zwraca obiekty z polami userId i friendId
     if (
       acceptedFriends?.some(
-        (rel) => rel.userId === friendId || rel.friendId === friendId
+        (rel: any) => rel.userId === friendId || rel.friendId === friendId
       )
     ) {
       return "accepted";
@@ -86,10 +86,10 @@ export default function AllUserList({ users }: UserListProps) {
 
                 return (
                   <li key={u.userId} className="flex items-center gap-2">
-                    <span
+                    {/* <span
                       className={`w-3 h-3 rounded-full ${u.isOnline ? "bg-green-500" : "bg-red-500"}`}
                       title={u.isOnline ? "Online" : "Offline"}
-                    ></span>
+                    ></span> */}
                     {u.name} - ({u.email})
                     <AddFriendButtonStatus
                       friendId={u.userId}

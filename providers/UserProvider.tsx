@@ -1,29 +1,32 @@
 "use client";
 
 import { api } from "@/convex/_generated/api";
-import { useAuth, useUser } from "@clerk/nextjs";
-import { useMutation } from "convex/react";
+import { useUser } from "@clerk/nextjs";
+import { useMutation, useQuery } from "convex/react";
 import React from "react";
 
 export default function UserProvider() {
-  const { isSignedIn, user } = useUser();
-  const { sessionId } = useAuth();
+  const { user, isSignedIn } = useUser();
 
   const saveUser = useMutation(api.mutations.users.createNewUser);
+  const existingUser = useQuery(api.queries.users.getUserById, {
+    userId: user?.id || "",
+  });
 
   React.useEffect(() => {
-    if (isSignedIn && user && sessionId) {
+    if (!isSignedIn || !user || existingUser === undefined) return;
+
+    if (existingUser === null) {
+      console.log("Zapisany user saveUser");
       saveUser({
-        userId: user.id,
+        userId: user?.id,
         name: user.fullName || "Anonim",
         email: user.primaryEmailAddress?.emailAddress || "",
         // isOnline: true,
         // sessionId,
       });
-
-      console.log("Zapisany user saveUser");
     }
-  }, [isSignedIn, user, sessionId, saveUser]);
+  }, [user, saveUser, isSignedIn, existingUser]);
 
   return null;
 }

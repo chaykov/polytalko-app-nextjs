@@ -1,8 +1,8 @@
 "use client";
 
 import { SignInButton, useUser } from "@clerk/nextjs";
-import BackgroundPattern from "./components/BackgroundPattern";
 import { useRouter } from "next/navigation";
+import BackgroundPattern from "./components/BackgroundPattern";
 
 export default function Home() {
   const { isSignedIn } = useUser();
