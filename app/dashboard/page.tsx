@@ -1,12 +1,9 @@
 "use client";
 
-import { SignedIn, SignOutButton, useClerk, useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { SignedIn, SignOutButton, useUser } from "@clerk/nextjs";
 
 export default function Dashboard() {
   const { user, isLoaded } = useUser();
-  const { signOut } = useClerk();
-  const router = useRouter();
 
   return (
     <>
@@ -24,8 +21,6 @@ export default function Dashboard() {
           </div>
         )}
       </div>
-
-      <div className="p-8"></div>
     </>
   );
 }
