@@ -19,10 +19,14 @@ export default function IncomingRequests({
   const { user } = useUser();
   const userId = user?.id;
 
-  const incomingRequests: FriendRelationship[] =
+  const incomingRequestsData =
     useQuery(api.queries.users.getIncomingFriendRequests, {
       userId: userId || "",
     }) ?? [];
+
+  const incomingRequests: FriendRelationship[] = React.useMemo(() => {
+    return incomingRequestsData ? [...incomingRequestsData] : [];
+  }, [incomingRequestsData]);
 
   const acceptFriend = useMutation(api.mutations.friends.acceptFriendRequest);
 
@@ -37,11 +41,6 @@ export default function IncomingRequests({
       console.error("Error accepting friend", error);
     }
   };
-
-  // Debug: Logowawnie danych, aby upewnić się, ze są pobierane
-  React.useEffect(() => {
-    console.log("Incoming request:", incomingRequests);
-  }, [incomingRequests]);
 
   return (
     <div className="p-4 border shadow-md rounded-lg mt-4">

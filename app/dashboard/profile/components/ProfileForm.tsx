@@ -5,7 +5,24 @@ import { toast } from "@/hooks/use-toast";
 import { useMutation } from "convex/react";
 import { useEffect, useRef } from "react";
 
-export default function ProfileForm({ userProfile, userId, setIsLoaded }: any) {
+interface UserProfileProps {
+  name?: string;
+  age?: number;
+  country?: string;
+  description?: string;
+}
+
+interface ProfileFormProps {
+  userProfile?: UserProfileProps | null;
+  userId: string | undefined;
+  setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ProfileForm({
+  userProfile,
+  userId,
+  setIsLoaded,
+}: ProfileFormProps) {
   // Aktualizowanie zmiany profila
   const updateProfile = useMutation(api.mutations.users.updateUserProfile);
 

@@ -21,10 +21,9 @@ export default function FriendsList({
       userId: userId || "",
     }) || [];
 
-  const acceptedFriends = React.useMemo(
-    () => acceptedFriendsData ?? [],
-    [acceptedFriendsData]
-  );
+  const acceptedFriends = React.useMemo(() => {
+    return acceptedFriendsData ? [...acceptedFriendsData] : [];
+  }, [acceptedFriendsData]);
 
   const uniqueFriends = React.useMemo(() => {
     return Array.from(
