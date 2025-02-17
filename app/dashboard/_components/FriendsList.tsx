@@ -21,14 +21,16 @@ export default function FriendsList({
       userId: userId || "",
     }) ?? [];
 
-  const uniqueFriends = Array.from(
-    new Map(
-      acceptedFriends.map((friend) => [
-        friend.userId === userId ? friend.friendId : friend.userId,
-        friend,
-      ])
-    ).values()
-  );
+  const uniqueFriends = React.useMemo(() => {
+    return Array.from(
+      new Map(
+        acceptedFriends.map((friend) => [
+          friend.userId === userId ? friend.friendId : friend.userId,
+          friend,
+        ])
+      ).values()
+    );
+  }, [acceptedFriends, userId]);
 
   // Debug: Logowawnie danych, aby upewnić się, ze są pobierane
   React.useEffect(() => {

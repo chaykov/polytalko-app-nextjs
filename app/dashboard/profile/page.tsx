@@ -22,11 +22,13 @@ export default function Profile() {
     <main>
       <div className="flex flex-row">
         <ProfileStatus />
-        <ProfileForm
-          userId={userId}
-          userProfile={userProfile}
-          setIsLoaded={setIsLoaded}
-        />
+        {isLoaded && (
+          <ProfileForm
+            userId={userId}
+            userProfile={userProfile}
+            setIsLoaded={setIsLoaded}
+          />
+        )}
       </div>
       <FriendsList title="Your friends" />
     </main>

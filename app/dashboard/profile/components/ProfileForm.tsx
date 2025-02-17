@@ -28,7 +28,7 @@ export default function ProfileForm({ userProfile, userId, setIsLoaded }: any) {
       };
       setIsLoaded(true);
     }
-  }, [userProfile]);
+  }, [userProfile, setIsLoaded]);
 
   // Aktualizacja profilu po kliknięciu "Update profile"
   const handleUpdateProfile = async (e: React.FormEvent) => {
