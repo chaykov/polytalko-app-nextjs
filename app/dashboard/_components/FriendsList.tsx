@@ -30,7 +30,7 @@ export default function FriendsList({
     if (acceptedFriendsData && acceptedFriendsData !== acceptedFriends) {
       setAcceptedFriends(acceptedFriendsData);
     }
-  }, [acceptedFriendsData]);
+  }, [acceptedFriendsData, acceptedFriends]);
 
   return (
     <div className="p-4 border shadow-md rounded-lg mt-4">
