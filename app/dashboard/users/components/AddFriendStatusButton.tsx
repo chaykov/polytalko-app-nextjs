@@ -3,26 +3,33 @@
 import { api } from "@/convex/_generated/api";
 import { toast } from "@/hooks/use-toast";
 import { useUser } from "@clerk/nextjs";
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 
 interface AddFriendButtonStatusProps {
   friendId: string;
-  relationshipStatus?: "pending" | "accepted"; // status relacji
 }
 
 export default function AddFriendButtonStatus({
   friendId,
-  relationshipStatus,
 }: AddFriendButtonStatusProps) {
   const { user } = useUser();
   const userId = user?.id;
   const addFriend = useMutation(api.mutations.friends.addFriend);
+
+  const relationshipStatus =
+    userId && friendId
+      ? useQuery(api.queries.friends.getFriendshipStatus, {
+          userId,
+          friendId,
+        })
+      : undefined;
 
   const handleAddFriend = async () => {
     if (!userId) return;
 
     try {
       await addFriend({ userId, friendId });
+      toast({ description: "Friend request sent!" });
     } catch (error) {
       toast({ description: "Error adding friend", variant: "destructive" });
       console.error("Error adding friend:", error);
@@ -30,7 +37,8 @@ export default function AddFriendButtonStatus({
   };
 
   // Jeśli status jest "pending" lub "accepted", przycisk będzie disabled
-  const disabled = relationshipStatus !== undefined;
+  const disabled =
+    relationshipStatus === "pending" || relationshipStatus === "accepted";
 
   let buttonLabel = "Add friend";
   if (relationshipStatus === "pending") {

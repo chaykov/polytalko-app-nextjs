@@ -7,6 +7,7 @@ import { api } from "@/convex/_generated/api";
 
 import ProfileForm from "./components/ProfileForm";
 import FriendsList from "../_components/FriendsList";
+import ProfileStatus from "./components/ProfileStatus";
 
 export default function Profile() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -18,20 +19,16 @@ export default function Profile() {
   });
 
   return (
-    <div>
-      <h2>Profile {user?.fullName}</h2>
-      {user ? (
-        <>
-          <ProfileForm
-            userId={userId}
-            userProfile={userProfile}
-            setIsLoaded={setIsLoaded}
-          />
-          <FriendsList title="Your friends" />
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
+    <main>
+      <div className="flex flex-row">
+        <ProfileStatus />
+        <ProfileForm
+          userId={userId}
+          userProfile={userProfile}
+          setIsLoaded={setIsLoaded}
+        />
+      </div>
+      <FriendsList title="Your friends" />
+    </main>
   );
 }

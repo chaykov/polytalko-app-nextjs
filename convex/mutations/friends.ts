@@ -28,6 +28,30 @@ export const addFriend = mutation({
   },
 });
 
+// export const acceptFriendRequest = mutation({
+//   args: {
+//     userId: v.string(),
+//     friendId: v.string(),
+//   },
+//   handler: async (ctx, { userId, friendId }) => {
+//     const request = (await ctx.db
+//       .query("friends")
+//       .filter((q) => q.eq(q.field("userId"), friendId))
+//       .filter((q) => q.eq(q.field("friendId"), userId))
+//       .first()) as Friends;
+
+//     if (request && request.status === "pending") {
+//       await ctx.db.patch(request._id, { status: "accepted" });
+//       await ctx.db.insert("friends", {
+//         userId,
+//         friendId,
+//         status: "accepted",
+//         createdAt: Date.now(),
+//       });
+//     }
+//   },
+// });
+
 export const acceptFriendRequest = mutation({
   args: {
     userId: v.string(),
@@ -38,16 +62,22 @@ export const acceptFriendRequest = mutation({
       .query("friends")
       .filter((q) => q.eq(q.field("userId"), friendId))
       .filter((q) => q.eq(q.field("friendId"), userId))
+      .filter((q) => q.eq(q.field("status"), "pending"))
       .first()) as Friends;
 
-    if (request && request.status === "pending") {
-      await ctx.db.patch(request._id, { status: "accepted" });
-      await ctx.db.insert("friends", {
-        userId,
-        friendId,
-        status: "accepted",
-        createdAt: Date.now(),
-      });
+    if (!request) {
+      throw new Error("No pending friend request found");
     }
+
+    //Akceptujemy istniejaca znajomosc
+    await ctx.db.patch(request._id, { status: "accepted" });
+
+    // Tworzymy drugi wpis w bazie aby znajomosc byla dwustronna
+    await ctx.db.insert("friends", {
+      userId,
+      friendId,
+      status: "accepted",
+      createdAt: Date.now(),
+    });
   },
 });

@@ -55,7 +55,7 @@ export default function ProfileForm({ userProfile, userId, setIsLoaded }: any) {
   return (
     <form
       onSubmit={handleUpdateProfile}
-      className="flex flex-col space-y-1 items-center"
+      className="flex flex-col flex-1 space-y-1 items-center"
     >
       <label className="inline-block mr-1 font-semibold">Name:</label>
       <input
