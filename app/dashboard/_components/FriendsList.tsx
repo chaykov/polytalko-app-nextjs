@@ -16,10 +16,15 @@ export default function FriendsList({
   const { user } = useUser();
   const userId = user?.id;
 
-  const acceptedFriends: FriendRelationship[] =
+  const acceptedFriendsData: FriendRelationship[] =
     useQuery(api.queries.users.getAcceptedFriends, {
       userId: userId || "",
     }) ?? [];
+
+  const acceptedFriends = React.useMemo(
+    () => [...acceptedFriendsData],
+    [acceptedFriendsData]
+  );
 
   const uniqueFriends = React.useMemo(() => {
     return Array.from(
