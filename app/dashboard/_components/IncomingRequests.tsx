@@ -26,13 +26,9 @@ export default function IncomingRequests({
     }
   );
 
-  const [iconmingRequests, setIncomingRequests] = useState<
+  const [incomingRequests, setIncomingRequests] = useState<
     FriendRelationship[]
   >([]);
-
-  const incomingRequests: FriendRelationship[] = React.useMemo(() => {
-    return incomingRequestsData ? [...incomingRequestsData] : [];
-  }, [incomingRequestsData]);
 
   const acceptFriend = useMutation(api.mutations.friends.acceptFriendRequest);
 
