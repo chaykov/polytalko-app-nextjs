@@ -1,9 +1,7 @@
 import { useUser } from "@clerk/nextjs";
-import React from "react";
 
 export default function ProfileStatus() {
   const { user } = useUser();
-  const userId = user?.id;
 
   return (
     <div className="flex flex-1">
