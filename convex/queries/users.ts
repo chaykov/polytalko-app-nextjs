@@ -25,8 +25,8 @@ export const getAllUsers = query({
   },
 });
 
-// Pobieranie wszystkich uzytkownikow (zaakceptowanych) w znajomych uzytkownika
-export const getUserFriends = query({
+// Pobieranie wszystkich uzytkownikow (zaakceptowanych w znajomych uzytkownika)
+export const getAcceptedFriends = query({
   args: {
     userId: v.string(),
   },
@@ -36,5 +36,22 @@ export const getUserFriends = query({
       .filter((q) => q.eq(q.field("userId"), userId))
       .filter((q) => q.eq(q.field("status"), "accepted"))
       .collect()) as Friends[];
+  },
+});
+
+// Przychodzace potwierdzenie uzytkownika na akceptacje do znajomych
+export const getIncomingFriendRequests = query({
+  args: {
+    userId: v.string(),
+  },
+  handler: async (ctx, { userId }) => {
+    // Zapytanie pobiera rekordy, gdzie zalogowany user jest odbiorcą (friendId) i status to "pending"
+    const requests = await ctx.db
+      .query("friends")
+      .filter((q) => q.eq(q.field("friendId"), userId))
+      .filter((q) => q.eq(q.field("status"), "pending"))
+      .collect();
+
+    return requests;
   },
 });

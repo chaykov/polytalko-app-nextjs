@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 
 export default function ProfileForm({ userProfile, userId, setIsLoaded }: any) {
   // Aktualizowanie zmiany profila
-  const updateProfile = useMutation(api.mutations.updateUserProfile);
+  const updateProfile = useMutation(api.mutations.users.updateUserProfile);
 
   // **useRef** przechowuje wartości profilu, zamiast 'useState'
   const profileRef = useRef({

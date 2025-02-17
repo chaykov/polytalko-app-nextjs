@@ -16,7 +16,7 @@ export default function AddFriendButtonStatus({
 }: AddFriendButtonStatusProps) {
   const { user } = useUser();
   const userId = user?.id;
-  const addFriend = useMutation(api.mutations.addFriend);
+  const addFriend = useMutation(api.mutations.friends.addFriend);
 
   const handleAddFriend = async () => {
     if (!userId) return;

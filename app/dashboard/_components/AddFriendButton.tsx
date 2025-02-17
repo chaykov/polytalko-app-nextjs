@@ -12,7 +12,7 @@ export default function AddFriendButton({ friendId }: AddFriendButtonProps) {
   const { user } = useUser();
   const userId = user?.id;
 
-  const addFriend = useMutation(api.mutations.addFriend);
+  const addFriend = useMutation(api.mutations.friends.addFriend);
 
   const handleAddFriend = async () => {
     if (!userId) return;
@@ -31,7 +31,7 @@ export default function AddFriendButton({ friendId }: AddFriendButtonProps) {
       onClick={handleAddFriend}
       className="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600"
     >
-      Add friend
+      Add friend test
     </button>
   );
 }

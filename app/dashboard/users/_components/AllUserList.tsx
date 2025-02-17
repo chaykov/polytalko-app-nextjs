@@ -28,13 +28,12 @@ export default function AllUserList({ users }: UserListProps) {
 
   // Pobieranie listy przychodzących zaproszeń i zaakceptowanych znajomych
   const pendingRequests = useQuery(
-    api.queries.getIncomingFriendRequests.getIncomingFriendRequests,
+    api.queries.users.getIncomingFriendRequests,
     { userId: userId || "" }
   );
-  const acceptedFriends = useQuery(
-    api.queries.getAcceptedFriends.getAcceptedFriends,
-    { userId: userId || "" }
-  );
+  const acceptedFriends = useQuery(api.queries.users.getAcceptedFriends, {
+    userId: userId || "",
+  });
 
   // Pobieranie wszsytkich uzytkownikow (pozostalych) - przykladowo
   const getAllUsers = useQuery(api.queries.users.getAllUsers, {

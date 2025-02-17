@@ -4,4 +4,7 @@ export interface FriendRelationship {
   friendId?: string; // Opcjonalne
   status?: string;
   createdAt: number;
+  age?: number;
+  country?: string;
+  description?: string;
 }

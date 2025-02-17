@@ -3,7 +3,7 @@
 // Utils
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
-import AllUserList from "./_components/AllUserList";
+// import AllUserList from "./_components/AllUserList";
 import UserFriends from "./_components/UserFriends";
 import { useUser } from "@clerk/nextjs";
 

@@ -1,19 +1,21 @@
 "use client";
 
-import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+
 import ProfileForm from "./components/ProfileForm";
-import FriendList from "./components/FriendList";
-// import { useProfile } from "@/hooks/_useProfile";
-// import { useFriends } from "@/hooks/_useFriends";
+import FriendsList from "../_components/FriendsList";
 
 export default function Profile() {
   const [isLoaded, setIsLoaded] = useState(false);
   const { user } = useUser();
   const userId = user?.id;
 
-  // const userProfile = useProfile(userId);
-  // const friends = useFriends(userId);
+  const userProfile = useQuery(api.queries.users.getUserById, {
+    userId: userId || "",
+  });
 
   return (
     <div>
@@ -25,7 +27,7 @@ export default function Profile() {
             userProfile={userProfile}
             setIsLoaded={setIsLoaded}
           />
-          <FriendList friends={friends} />
+          <FriendsList title="Your friends" />
         </>
       ) : (
         <p>Loading...</p>
