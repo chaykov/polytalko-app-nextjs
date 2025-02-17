@@ -1,6 +1,5 @@
 import { useUser } from "@clerk/nextjs";
 import React from "react";
-import LogoutButton from "../../_components/LogoutButton";
 
 export default function ProfileStatus() {
   const { user } = useUser();
@@ -14,7 +13,7 @@ export default function ProfileStatus() {
           Email: {user?.primaryEmailAddress?.emailAddress}
         </p>
 
-        <LogoutButton userId={userId as string} />
+        {/* <LogoutButton userId={userId as string} /> */}
       </div>
     </div>
   );
