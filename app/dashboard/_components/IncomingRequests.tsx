@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "@/hooks/use-toast";
 import { FriendRelationship } from "@/types/FriendRelationship";
@@ -8,7 +8,7 @@ import { useUser } from "@clerk/nextjs";
 import { useMutation, useQuery } from "convex/react";
 
 interface IncomingRequestsProps {
-  title: string;
+  title?: string;
   buttonTitle: string;
 }
 
@@ -19,10 +19,16 @@ export default function IncomingRequests({
   const { user } = useUser();
   const userId = user?.id;
 
-  const incomingRequestsData =
-    useQuery(api.queries.users.getIncomingFriendRequests, {
+  const incomingRequestsData = useQuery(
+    api.queries.users.getIncomingFriendRequests,
+    {
       userId: userId || "",
-    }) ?? [];
+    }
+  );
+
+  const [iconmingRequests, setIncomingRequests] = useState<
+    FriendRelationship[]
+  >([]);
 
   const incomingRequests: FriendRelationship[] = React.useMemo(() => {
     return incomingRequestsData ? [...incomingRequestsData] : [];
@@ -41,6 +47,12 @@ export default function IncomingRequests({
       console.error("Error accepting friend", error);
     }
   };
+
+  useEffect(() => {
+    if (incomingRequestsData && incomingRequestsData !== incomingRequests) {
+      setIncomingRequests(incomingRequestsData);
+    }
+  }, [incomingRequestsData]);
 
   return (
     <div className="p-4 border shadow-md rounded-lg mt-4">
