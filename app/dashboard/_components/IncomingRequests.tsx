@@ -48,7 +48,7 @@ export default function IncomingRequests({
     if (incomingRequestsData && incomingRequestsData !== incomingRequests) {
       setIncomingRequests(incomingRequestsData);
     }
-  }, [incomingRequestsData]);
+  }, [incomingRequestsData, incomingRequests]);
 
   return (
     <div className="p-4 border shadow-md rounded-lg mt-4">
