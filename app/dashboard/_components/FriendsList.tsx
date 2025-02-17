@@ -4,7 +4,7 @@ import { api } from "@/convex/_generated/api";
 import { FriendRelationship } from "@/types/FriendRelationship";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 interface FriendsListProps {
   title?: string;
@@ -16,24 +16,22 @@ export default function FriendsList({
   const { user } = useUser();
   const userId = user?.id;
 
-  // 📌 Pobieramy dane ZAWSZE na górze komponentu
-  const acceptedFriendsData = useQuery(api.queries.users.getAcceptedFriends, {
-    userId: userId || "",
-  });
+  // 📌 `useQuery()` na górze komponentu
+  const acceptedFriendsData =
+    useQuery(api.queries.users.getAcceptedFriends, {
+      userId: userId || "",
+    }) ?? [];
 
-  // 📌 Używamy `useState()` zamiast `useRef()`, aby przechowywać poprzednie dane
-  const [acceptedFriends, setAcceptedFriends] = useState<FriendRelationship[]>(
-    []
-  );
+  // 📌 Używamy `useState()`, aby unikać zbędnych re-renderów
+  const [acceptedFriends, setAcceptedFriends] =
+    useState<FriendRelationship[]>(acceptedFriendsData);
 
-  // 📌 `useEffect()` monitoruje `JSON.stringify()`, aby wykrywać realne zmiany
+  // 📌 Aktualizujemy `useState()`, tylko gdy dane się zmienią
   useEffect(() => {
-    if (
-      JSON.stringify(acceptedFriends) !== JSON.stringify(acceptedFriendsData)
-    ) {
-      setAcceptedFriends(acceptedFriendsData ?? []);
+    if (acceptedFriendsData !== acceptedFriends) {
+      setAcceptedFriends(acceptedFriendsData);
     }
-  }, [acceptedFriendsData]);
+  }, [acceptedFriendsData, acceptedFriends]);
 
   // 📌 `useMemo()` optymalizuje listę unikalnych znajomych
   const uniqueFriends = useMemo(() => {
@@ -45,7 +43,7 @@ export default function FriendsList({
         ])
       ).values()
     );
-  }, [JSON.stringify(acceptedFriends), userId]);
+  }, [acceptedFriends, userId]);
 
   return (
     <div className="p-4 border shadow-md rounded-lg mt-4">
