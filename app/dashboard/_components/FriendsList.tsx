@@ -4,7 +4,7 @@ import { api } from "@/convex/_generated/api";
 import { FriendRelationship } from "@/types/FriendRelationship";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
-import React from "react";
+import React, { useMemo } from "react";
 
 interface FriendsListProps {
   title?: string;
@@ -16,16 +16,17 @@ export default function FriendsList({
   const { user } = useUser();
   const userId = user?.id;
 
-  const acceptedFriendsData: FriendRelationship[] =
+  const acceptedFriendsData =
     useQuery(api.queries.users.getAcceptedFriends, {
       userId: userId || "",
-    }) || [];
+    }) ?? [];
 
-  const acceptedFriends = React.useMemo(() => {
-    return acceptedFriendsData ? [...acceptedFriendsData] : [];
-  }, [acceptedFriendsData]);
+  const acceptedFriends: FriendRelationship[] = useMemo(
+    () => [...acceptedFriendsData],
+    [acceptedFriendsData]
+  );
 
-  const uniqueFriends = React.useMemo(() => {
+  const uniqueFriends = useMemo(() => {
     return Array.from(
       new Map(
         acceptedFriends.map((friend) => [
@@ -53,7 +54,7 @@ export default function FriendsList({
                 key={friend._id}
               >
                 <span className="font-bold">{friendDisplay}</span>
-                <span>Age: {friend.age || "N/A"}</span>
+                <span>Age: {friend?.age || "N/A"}</span>
                 <span>Country: {friend.country || "Unknown"}</span>
                 <span>
                   Description: {friend.description || "No description"}
