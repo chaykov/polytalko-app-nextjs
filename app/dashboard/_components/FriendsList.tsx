@@ -19,10 +19,10 @@ export default function FriendsList({
   const acceptedFriendsData: FriendRelationship[] =
     useQuery(api.queries.users.getAcceptedFriends, {
       userId: userId || "",
-    }) ?? [];
+    }) || [];
 
   const acceptedFriends = React.useMemo(
-    () => [...acceptedFriendsData],
+    () => acceptedFriendsData ?? [],
     [acceptedFriendsData]
   );
 
@@ -36,11 +36,6 @@ export default function FriendsList({
       ).values()
     );
   }, [acceptedFriends, userId]);
-
-  // Debug: Logowawnie danych, aby upewnić się, ze są pobierane
-  React.useEffect(() => {
-    console.log("Accepted friends:", acceptedFriends);
-  }, [acceptedFriends]);
 
   return (
     <div className="p-4 border shadow-md rounded-lg mt-4">
