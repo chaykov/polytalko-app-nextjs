@@ -4,7 +4,7 @@ import { api } from "@/convex/_generated/api";
 import { FriendRelationship } from "@/types/FriendRelationship";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 
 interface FriendsListProps {
   title?: string;
@@ -21,10 +21,17 @@ export default function FriendsList({
       userId: userId || "",
     }) ?? [];
 
-  const acceptedFriends: FriendRelationship[] = useMemo(
-    () => [...acceptedFriendsData],
-    [acceptedFriendsData]
+  const acceptedFriendsRef = useRef<FriendRelationship[]>(
+    acceptedFriendsData || []
   );
+
+  useEffect(() => {
+    if (acceptedFriendsData) {
+      acceptedFriendsRef.current = acceptedFriendsData;
+    }
+  }, [acceptedFriendsData]);
+
+  const acceptedFriends = acceptedFriendsRef.current;
 
   const uniqueFriends = useMemo(() => {
     return Array.from(
