@@ -31,14 +31,19 @@ export default function AddFriendStatusButton({
 
     try {
       await addFriend({ userId, friendId });
+      await new Promise((resolve) => setTimeout(resolve, 500));
       setLocalStatus("pending"); // 🔄 Zmieniamy lokalnie, zanim dane wrócą z bazy
+      location.reload();
     } catch (error) {
       console.error("Error adding friend:", error);
     }
   };
 
+  if (relationshipStatus === "accepted") return null;
+
   // 📌 Jeśli status to "pending" lub "accepted", przycisk jest zablokowany
   const disabled = localStatus === "pending" || localStatus === "accepted";
+  const buttonLabel = disabled ? "Request sent" : "Add friend";
 
   return (
     <button
@@ -50,11 +55,7 @@ export default function AddFriendStatusButton({
           : "bg-blue-500 hover:bg-blue-600"
       }`}
     >
-      {localStatus === "pending"
-        ? "Request sent"
-        : localStatus === "accepted"
-          ? "Already friends"
-          : "Add Friend"}
+      {buttonLabel}
     </button>
   );
 }
