@@ -3,7 +3,7 @@ import React from "react";
 
 export default function NavBar() {
   return (
-    <header className="flex py-4 shadow bg-grey-800 px-8">
+    <header className="flex py-4 shadow-sm bg-grey-800 px-8">
       <nav className="flex items-center gap-10 cointainer">
         <Link className="mr-auto" href="/dashboard">
           PolyTalko

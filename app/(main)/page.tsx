@@ -9,7 +9,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="relative isolate overflow-hidden bg-gradient-to-br from-indigo-700 to-indigo-900 h-screen">
+    <div className="relative isolate overflow-hidden bg-linear-to-br from-indigo-700 to-indigo-900 h-screen">
       <BackgroundPattern />
       <div className="flex items-center min-h-full justify-center flex-col">
         <div className="mx-auto max-w-2xl text-center p-6 sm:p-12">
@@ -33,14 +33,14 @@ export default function Home() {
                 fallbackRedirectUrl={"/dashboard"}
                 forceRedirectUrl={"/dashboard"}
               >
-                <button className="bg-white px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                <button className="bg-white px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-xs hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                   Get started
                 </button>
               </SignInButton>
             ) : (
               <button
                 onClick={() => router.push("/dashboard")}
-                className="bg-white px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="bg-white px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-xs hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 Go to Dashboard
               </button>
