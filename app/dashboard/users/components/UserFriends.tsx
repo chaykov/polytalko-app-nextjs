@@ -1,7 +1,7 @@
 "use client";
 
-import FriendsList from "@/app/dashboard/_components/FriendsList";
-import IncomingRequests from "../../_components/IncomingRequests";
+import FriendsList from "@/app/dashboard/components/FriendsList";
+import IncomingRequests from "../../components/IncomingRequests";
 
 export default function UserFriends() {
   return (

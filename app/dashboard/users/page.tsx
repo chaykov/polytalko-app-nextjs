@@ -2,7 +2,7 @@
 
 // Utils
 import UserList from "./components/UserList";
-import FriendsList from "../_components/FriendsList";
+import FriendsList from "../components/FriendsList";
 import { Input } from "@/components/ui/input";
 
 // Komponenty

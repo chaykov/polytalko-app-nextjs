@@ -6,7 +6,7 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
 import ProfileForm from "./components/ProfileForm";
-import FriendsList from "../_components/FriendsList";
+import FriendsList from "../components/FriendsList";
 import ProfileStatus from "./components/ProfileStatus";
 
 export default function Profile() {
