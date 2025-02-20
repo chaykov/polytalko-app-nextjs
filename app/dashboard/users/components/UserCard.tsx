@@ -1,6 +1,6 @@
-import { useUser } from "@clerk/nextjs";
 import { getGravatarUrl } from "@/utils/getGravatarUrl";
-import { MailPlus, UserPlus } from "lucide-react";
+import UserCardButtons from "./UserCardButtons";
+import { useUser } from "@clerk/nextjs";
 
 interface UserCardProps {
   userId: string;
@@ -19,9 +19,6 @@ export default function UserCard({
   relationshipStatus,
   ...rest
 }: UserCardProps) {
-  const { user } = useUser();
-  const currentUserId = user?.id;
-
   return (
     // <li className="flex items-center gap-2">
     //   {friendId &&
@@ -67,27 +64,10 @@ export default function UserCard({
         </dl>
       </div>
       <div>
-        <div className="-mt-px flex divide-x divide-gray-200">
-          <div className="flex w-0 flex-1">
-            <a
-              href="#"
-              className="hover:bg-green-100 relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-            >
-              <UserPlus aria-hidden="true" className="size-5 text-green-500" />
-              Add friend
-            </a>
-
-            <div className="-ml-px flex w-0 flex-1">
-              <a
-                href="#"
-                className="hover:bg-blue-100 hover:text-black/70 relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-              >
-                <MailPlus aria-hidden="true" className="size-5 text-blue-500" />
-                Email
-              </a>
-            </div>
-          </div>
-        </div>
+        <UserCardButtons
+          relationshipStatus={relationshipStatus}
+          userId={userId}
+        />
       </div>
     </li>
   );
