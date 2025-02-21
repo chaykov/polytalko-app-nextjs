@@ -1,9 +1,9 @@
 import { v } from "convex/values";
 import { query } from "../_generated/server";
-import { Doc } from "../_generated/dataModel";
+// import { Doc } from "../_generated/dataModel";
 
-type User = Doc<"users">;
-type Friends = Doc<"friends">;
+// type User = Doc<"users">;
+// type Friends = Doc<"friends">;
 
 // Pobieranie dane uzytkownika (siebie)
 // export const getUserById = query({
