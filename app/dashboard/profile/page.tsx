@@ -4,7 +4,6 @@ import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
-import FriendsList from "../components/FriendsList";
 import EditProfile from "./components/EditProfile";
 import ShowProfile from "./components/ShowProfile";
 
