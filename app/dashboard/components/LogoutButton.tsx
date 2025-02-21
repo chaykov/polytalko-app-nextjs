@@ -1,35 +1,36 @@
-// "use client";
+"use client";
+import { useClerk } from "@clerk/nextjs";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { useState } from "react";
 
-// import { api } from "@/convex/_generated/api";
-// import { SignOutButton, useAuth } from "@clerk/nextjs";
-// import { useMutation } from "convex/react";
-// import { useRouter } from "next/navigation";
+export default function LogoutButton() {
+  const { signOut, user } = useClerk();
+  const setUserStatus = useMutation(api.mutations.users.setUserStatus);
+  const [isLoading, setIsLoading] = useState(false);
 
-// interface LogoutProps {
-//   userId: string;
-// }
+  const handleLogout = async () => {
+    setIsLoading(true);
+    try {
+      if (user) {
+        await setUserStatus({ clerkId: user.id, status: "offline" }); // 🔥 Najpierw zmieniamy status
+      }
+      await signOut(); // Następnie wylogowujemy użytkownika
+    } catch (error) {
+      console.error("Failed to logout:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-// export default function LogoutButton({ userId }: LogoutProps) {
-//   const { sessionId } = useAuth();
-//   const setOffline = useMutation(api.logout.setOffline);
-
-//   const router = useRouter();
-
-//   const handleLogout = () => {
-//     if (!userId || !sessionId) return;
-//     setOffline({ userId, sessionId: sessionId || "" });
-
-//     router.push("/");
-//   };
-
-//   return (
-//     <SignOutButton signOutOptions={{ redirectUrl: "/" }}>
-//       <button
-//         onClick={handleLogout}
-//         className="bg-red-500 text-white px-4 py-2"
-//       >
-//         Log out
-//       </button>
-//     </SignOutButton>
-//   );
-// }
+  return (
+    <button
+      onClick={handleLogout}
+      aria-label="Logout"
+      className="bg-red-500 text-white p-2 rounded"
+      disabled={isLoading}
+    >
+      {isLoading ? "Logging out..." : "Logout"}
+    </button>
+  );
+}

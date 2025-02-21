@@ -1,85 +1,38 @@
 import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
-import UserCard from "./UserCard";
+import React from "react";
+import StatusBadge from "../../components/StatusBadge";
 
 export default function UserList() {
   const { user } = useUser();
-  const userId = user?.id;
+  const clerkId = user?.id;
 
-  // Pobieranie wszsytkich uzytkownikow (pozostalych) - przykladowo
-  const allUsers = useQuery(api.queries.users.getAllUsers, {
-    userId: userId || "",
+  const users = useQuery(api.queries.users.getAllUsers, {
+    clerkId: clerkId || "",
   });
 
-  // Pobieranie listy przychodzących zaproszeń i zaakceptowanych znajomych
-  const pendingRequests = useQuery(
-    api.queries.users.getIncomingFriendRequests,
-    { userId: userId || "" }
-  );
-  const acceptedFriends = useQuery(api.queries.users.getAcceptedFriends, {
-    userId: userId || "",
-  });
-
-  // Funkcja, ktora dla danego friendId zwraca status relacji, jesli istnieje
-  const getRelationshipStatus = (
-    friendId: string
-  ): "pending" | "accepted" | undefined => {
-    // sprawdz, czy w pendingRequests jest rekord, gdzie friendId odpowiada wyslanemu zaproszeniu
-    if (pendingRequests?.some((req) => req.userId === friendId)) {
-      return "pending";
-    }
-
-    // sprawdz czy w acceptedFriends jest rekord, gdize zapytanie zwraca obiekty z polami userId i friendId
-    if (
-      acceptedFriends?.some(
-        (rel) => rel.userId === friendId || rel.friendId === friendId
-      )
-    ) {
-      return "accepted";
-    }
-
-    return undefined;
-  };
+  if (!users) {
+    <p>Loading list of users...</p>;
+  }
 
   return (
-    // <div className="p-4 border rounded-lg shadow-md">
-    //   <h3 className="mt-4 text-lg font-semibold">List of users:</h3>
-    //   {allUsers?.length === 0 ? (
-    //     <p>Loading...</p>
-    //   ) : (
-    //     <ul>
-    //       {allUsers?.map((allUser) => {
-    //         if (allUser.userId === userId) return null; //pomijamy samego siebie
-
-    //         return (
-    //           <UserCard
-    //             key={allUser.userId}
-    //             relationshipStatus={getRelationshipStatus(allUser.userId)}
-    //             {...allUser}
-    //           />
-    //         );
-    //       })}
-    //     </ul>
-    //   )}
-    // </div>
-
-    // Nowy wyglad dla users:
-
-    <main className="p-4">
-      {allUsers?.length === 0 ? (
-        <p>Loading...</p>
+    <div className="p-4 border rounded-md shadow-md w-96">
+      <h2 className="text-xl font-bold mb-2">List of users</h2>
+      {users?.length === 0 ? (
+        <p>No users</p>
       ) : (
-        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {allUsers?.map((user) => (
-            <UserCard
-              key={user.userId}
-              relationshipStatus={getRelationshipStatus(user.userId)}
-              {...user}
-            />
+        <ul>
+          {users?.map((user) => (
+            <li key={user.clerkId} className="border-b py-2">
+              <div className="flex items-center gap-x-2">
+                <StatusBadge showText={false} status={user.status} />
+                <span className="font-bold">{user.name}</span>
+              </div>
+            </li>
           ))}
         </ul>
       )}
-    </main>
+    </div>
   );
 }

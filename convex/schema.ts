@@ -9,11 +9,7 @@ export default defineSchema({
     country: v.string(),
     age: v.number(),
     description: v.string(),
-    status: v.union(
-      v.literal("online"),
-      v.literal("offline"),
-      v.literal("away")
-    ),
+    status: v.union(v.literal("online"), v.literal("offline")),
     lastActive: v.number(),
   })
     .index("by_status", ["status"])

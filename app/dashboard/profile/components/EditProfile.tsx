@@ -1,17 +1,9 @@
 "use client";
 
-import { api } from "@/convex/_generated/api";
-import { useUser } from "@clerk/nextjs";
-import { useMutation } from "convex/react";
 import { useState } from "react";
-
-interface UserProfile {
-  name: string;
-  country: string;
-  age: number;
-  description: string;
-  clerkId: string;
-}
+import { UserProfile } from "@/types/types";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 export default function EditProfile({
   userProfile,
@@ -48,7 +40,7 @@ export default function EditProfile({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="p-4 border shadow-md flex-1">
       <h2 className="text-lg font-bold mb-2">Edytuj profil</h2>
 
       <label className="block">Imię:</label>

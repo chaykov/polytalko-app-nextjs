@@ -68,3 +68,22 @@ export const getUserProfile = query({
       .unique();
   },
 });
+
+export const getAllUsers = query({
+  args: { clerkId: v.string() },
+  handler: async (ctx, { clerkId }) => {
+    const users = await ctx.db
+      .query("users")
+      .withIndex("by_clerkId", (q) => q)
+      .collect();
+
+    return users
+      .filter((user) => user.clerkId !== clerkId)
+      .map(({ clerkId, name, email, status }) => ({
+        clerkId,
+        name,
+        email,
+        status,
+      }));
+  },
+});
