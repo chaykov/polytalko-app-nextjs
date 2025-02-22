@@ -258,3 +258,41 @@ export const rejectFriendRequest = mutation({
     });
   },
 });
+
+export const cancelFriendRequest = mutation({
+  args: {
+    clerkIdA: v.string(),
+    clerkIdB: v.string(),
+  },
+
+  handler: async (ctx, { clerkIdA, clerkIdB }) => {
+    const userA = await ctx.db
+      .query("users")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", clerkIdA))
+      .unique();
+
+    const userB = await ctx.db
+      .query("users")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", clerkIdB))
+      .unique();
+
+    if (!userA || !userB) {
+      throw new Error("User not found.");
+    }
+
+    const request = await ctx.db
+      .query("friends")
+      .withIndex("by_users", (q) =>
+        q.eq("userA", userA._id).eq("userB", userB._id)
+      )
+      .unique();
+
+    if (!request) {
+      throw new Error("No pending friend request found.");
+    }
+
+    await ctx.db.delete(request._id);
+
+    console.log(`Request canceled: ${userA._id} => ${userB._id}`);
+  },
+});

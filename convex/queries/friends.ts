@@ -56,3 +56,27 @@ export const getPendingRequests = query({
     ).then((results) => results.filter(Boolean)); // 🔥 Usuwamy `null` wpisy, jeśli jakiś użytkownik A nie istnieje
   },
 });
+
+export const getPendingRequestsCount = query({
+  args: { clerkId: v.string() },
+  handler: async (ctx, { clerkId }) => {
+    // 🔍 Pobieramy `_id` zalogowanego użytkownika na podstawie `clerkId`
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", clerkId))
+      .unique();
+
+    if (!user) {
+      throw new Error("⚠️ User not found.");
+    }
+
+    const pendingRequestsCount = await ctx.db
+      .query("friends")
+      .withIndex("by_userB", (q) =>
+        q.eq("userB", user._id).eq("status", "pending")
+      )
+      .collect();
+
+    return pendingRequestsCount.length;
+  },
+});

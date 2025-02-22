@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PolyTalko App (alpha v1)
 
-## Getting Started
+Ten projekt to mini aplikacja społecznościowa oparta na: **Next.js 15 + Convex + Clerk**.
+Poniżej znajduje się **lista funkcji**, które planujemy wdrożyć.
 
-First, run the development server:
+✅ - ukończone funkcje.
+🚧 - w trakcie implementacji
+⏳ - planowane
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 1. Autoryzacja i użytkownicy
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [x] ✅ Logowanie i rejestracja użytkownika (Clerk)
+- [x] ✅ Pobieranie profilu użytkownika (imię, wiek, kraj, opis)
+- [x] ✅ Edycja profilu użytkownika
+- [x] ✅ System statusów: "online", "offline", "away"
+- [] ⏳ Ostatnia aktywność użytkownika (np. "Ostatnio aktywny 10 min temu")
+- [x] ✅ Pobieranie wszystkich zarejestrowanych użytkowników
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 2. System znajomych
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [ ] ✅ Wysyłanie zaproszeń do znajomych
+- [ ] ⏳ Akceptowanie lub odrzucanie zaproszenia
+- [ ] ✅ Cofanie zaproszenia przed jego zaakceptowaniem
+- [ ] ⏳ Usuwanie znajomych
+- [ ] ⏳ Blokowanie użytkowników
+- [ ] ⏳ Pobieranie listy znajomych w czasie rzeczywistym
+- [ ] ⏳ Rekomendacje znajomych (np. znajomi znajomych)
 
-## Learn More
+## 3. Wiadomości (Czat 1:1)
 
-To learn more about Next.js, take a look at the following resources:
+- [ ] ⏳ Wysyłanie wiadomości tekstowych
+- [ ] ⏳ Real-time odbieranie wiadomości
+- [ ] ⏳ Historia rozmów między użytkownikami
+- [ ] ⏳ Powiadomienia o nowych wiadomościach
+- [ ] ⏳ Możliwość usunięcia wiadomości
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 4. Tablica postów (Social Feed)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [ ] ⏳ Tworzenie postów (treść + zdjęcia)
+- [ ] ⏳ Wyświetlanie postów znajomych
+- [ ] ⏳ Lajkowanie postów
+- [ ] ⏳ Komentowanie postów
+- [ ] ⏳ Usuwanie postów
+- [ ] ⏳ Filtrowanie postów według popularności lub daty
 
-## Deploy on Vercel
+## 5. Powiadomienia (Real-time)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [ ] ⏳ Powiadomienia o nowych zaproszeniach do znajomych
+- [ ] ⏳ Powiadomienia o zaakceptowanych zaproszeniach
+- [ ] ⏳ Powiadomienia o nowych wiadomościach
+- [ ] ⏳ Powiadomienia o polubieniach i komentarzach do postów
+- [ ] ⏳ Web Push Notifications (wyskakujące powiadomienia w przeglądarce)
+- [ ] ⏳ Powiadomienia dźwiękowe (np. przy nowym zaproszeniu)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 6. System statusów online/offline
+
+- [ ] ⏳ Wykrywanie, kiedy użytkownik jest online
+- [ ] ⏳ Oznaczanie użytkownika jako "away" po X minutach nieaktywności
+- [ ] ⏳ Zmiana statusu na "offline" po zamknięciu aplikacji
+- [ ] ⏳ Real-time aktualizacja statusu znajomych
+
+## 7. Dodatkowe ulepszenia
+
+- [ ] ⏳ Szybkie wyszukiwanie użytkowników
+- [ ] ⏳ Sortowanie znajomych według statusu (online / offline)
+- [ ] ⏳ Historia aktywności użytkownika (np. "Utworzył post 3 godziny temu")
+- [ ] ⏳ System zapamiętywania wiadomości dla offline (późniejsza synchronizacja)
+- [ ] ⏳ Możliwość ustawienia opisu statusu (np. "Zajęty", "Pracuję", "Dostępny")
+- [ ] ⏳ Integracja z powiadomieniami e-mail
