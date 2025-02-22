@@ -1,7 +1,7 @@
 # PolyTalko App (alpha v1)
 
 Ten projekt to mini aplikacja społecznościowa oparta na: **Next.js 15 + Convex + Clerk**.
-Poniżej znajduje się **lista funkcji**, które planujemy wdrożyć.
+Poniżej znajduje się **lista funkcji**, które planuję wdrożyć.
 
 ✅ - ukończone funkcje.
 🚧 - w trakcie implementacji
