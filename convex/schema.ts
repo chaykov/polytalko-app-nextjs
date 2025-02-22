@@ -29,5 +29,5 @@ export default defineSchema({
     deletedAt: v.optional(v.number()),
   })
     .index("by_users", ["userA", "userB"])
-    .index("by_userB", ["userB"]),
+    .index("by_userB", ["userB", "status"]),
 });
