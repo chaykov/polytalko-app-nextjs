@@ -12,7 +12,7 @@ Poniżej znajduje się **lista funkcji**, które planuję wdrożyć.
 - [x] ✅ Logowanie i rejestracja użytkownika (Clerk)
 - [x] ✅ Pobieranie profilu użytkownika (imię, wiek, kraj, opis)
 - [x] ✅ Edycja profilu użytkownika
-- [x] ✅ System statusów: "online", "offline", "away"
+- [x] ✅ System statusów: "online", "offline",
 - [ ] ⏳ Ostatnia aktywność użytkownika (np. "Ostatnio aktywny 10 min temu")
 - [x] ✅ Pobieranie wszystkich zarejestrowanych użytkowników
 
@@ -21,6 +21,7 @@ Poniżej znajduje się **lista funkcji**, które planuję wdrożyć.
 - [x] ✅ Wysyłanie zaproszeń do znajomych
 - [ ] 🚧 Akceptowanie lub odrzucanie zaproszenia
 - [x] ✅ Cofanie zaproszenia przed jego zaakceptowaniem
+- [x] ✅ Licznik oczekujących zaproszeń w nawigacji obok zakładki "Profile"
 - [ ] 🚧 Usuwanie znajomych
 - [ ] 🚧 Blokowanie użytkowników
 - [ ] 🚧 Pobieranie listy znajomych w czasie rzeczywistym
@@ -67,3 +68,19 @@ Poniżej znajduje się **lista funkcji**, które planuję wdrożyć.
 - [ ] ⏳ System zapamiętywania wiadomości dla offline (późniejsza synchronizacja)
 - [ ] ⏳ Możliwość ustawienia opisu statusu (np. "Zajęty", "Pracuję", "Dostępny")
 - [ ] ⏳ Integracja z powiadomieniami e-mail
+
+---
+
+## Opis funkcji
+
+### **Licznik oczekujących zaproszeń w nawigacji**
+
+Aplikacja dynamicznie pobiera liczbę oczekujących zaproszeń i wyświetla ją obok zakładki **Profile** w nawigacji. Jeśli uzytkownik ma zaproszenia, obok **Profile** pojawi się wskaźnik `+X`, informujący o licznie oczekujących zaproszeń.
+
+Przykłady wyświetlania:
+
+- `Profile` -> Brak zaproszeń
+- `Profile +1` -> Jedno oczekujące zaproszenie
+- `Profile +3` -> Trzy oczekujące zaproszenia
+
+Licznik aktualizuje się **automatycznie po wysłaniu lub zaakceptowaniu zaproszenia**.
