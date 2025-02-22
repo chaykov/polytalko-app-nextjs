@@ -13,17 +13,17 @@ Poniżej znajduje się **lista funkcji**, które planujemy wdrożyć.
 - [x] ✅ Pobieranie profilu użytkownika (imię, wiek, kraj, opis)
 - [x] ✅ Edycja profilu użytkownika
 - [x] ✅ System statusów: "online", "offline", "away"
-- [] ⏳ Ostatnia aktywność użytkownika (np. "Ostatnio aktywny 10 min temu")
+- [ ] ⏳ Ostatnia aktywność użytkownika (np. "Ostatnio aktywny 10 min temu")
 - [x] ✅ Pobieranie wszystkich zarejestrowanych użytkowników
 
 ## 2. System znajomych
 
-- [ ] ✅ Wysyłanie zaproszeń do znajomych
-- [ ] ⏳ Akceptowanie lub odrzucanie zaproszenia
-- [ ] ✅ Cofanie zaproszenia przed jego zaakceptowaniem
-- [ ] ⏳ Usuwanie znajomych
-- [ ] ⏳ Blokowanie użytkowników
-- [ ] ⏳ Pobieranie listy znajomych w czasie rzeczywistym
+- [x] ✅ Wysyłanie zaproszeń do znajomych
+- [ ] 🚧 Akceptowanie lub odrzucanie zaproszenia
+- [x] ✅ Cofanie zaproszenia przed jego zaakceptowaniem
+- [ ] 🚧 Usuwanie znajomych
+- [ ] 🚧 Blokowanie użytkowników
+- [ ] 🚧 Pobieranie listy znajomych w czasie rzeczywistym
 - [ ] ⏳ Rekomendacje znajomych (np. znajomi znajomych)
 
 ## 3. Wiadomości (Czat 1:1)
