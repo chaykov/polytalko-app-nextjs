@@ -19,6 +19,8 @@ import type * as queries_friends from "../queries/friends.js";
 import type * as queries_users from "../queries/users.js";
 import type * as types_friends from "../types/friends.js";
 import type * as types_users from "../types/users.js";
+import type * as validations_friendSchema from "../validations/friendSchema.js";
+import type * as validations_userSchema from "../validations/userSchema.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -35,6 +37,8 @@ declare const fullApi: ApiFromModules<{
   "queries/users": typeof queries_users;
   "types/friends": typeof types_friends;
   "types/users": typeof types_users;
+  "validations/friendSchema": typeof validations_friendSchema;
+  "validations/userSchema": typeof validations_userSchema;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

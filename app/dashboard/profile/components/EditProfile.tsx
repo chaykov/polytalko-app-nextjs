@@ -17,6 +17,7 @@ export default function EditProfile({
     country: userProfile?.country || "",
     age: userProfile?.age || "",
     description: userProfile?.description || "",
+    status: userProfile?.status || "online",
   });
 
   const handleChange = (
@@ -34,6 +35,7 @@ export default function EditProfile({
       country: form.country,
       age: form.age ? Number(form.age) : undefined,
       description: form.description,
+      lastActive: Date.now(),
     });
 
     alert("Profile is updated!");

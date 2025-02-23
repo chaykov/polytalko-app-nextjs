@@ -84,3 +84,5 @@ Przykłady wyświetlania:
 - `Profile +3` -> Trzy oczekujące zaproszenia
 
 Licznik aktualizuje się **automatycznie po wysłaniu lub zaakceptowaniu zaproszenia**.
+
+---

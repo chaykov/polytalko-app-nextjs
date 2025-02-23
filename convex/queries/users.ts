@@ -5,85 +5,65 @@ import { query } from "../_generated/server";
 // type User = Doc<"users">;
 // type Friends = Doc<"friends">;
 
-// Pobieranie dane uzytkownika (siebie)
-// export const getUserById = query({
-//   args: { userId: v.string() },
-//   handler: async (ctx, { userId }) => {
-//     if (!userId) return null;
+// OPCJA 1 - getUserProfile
+// export const getUserProfile = query({
+//   args: {
+//     clerkId: v.string(),
+//   },
 
-//     return (await ctx.db
+//   handler: async (ctx, { clerkId }) => {
+//     return await ctx.db
 //       .query("users")
-//       .filter((q) => q.eq(q.field("userId"), userId))
-//       .first()) as User;
+//       .withIndex("by_clerkId", (q) => q.eq("clerkId", clerkId))
+//       .unique();
 //   },
 // });
 
-// Pobieranie wszystkich uzytkownikow w bazie danych
-// export const getAllUsers = query({
-//   handler: async (ctx, {}) => {
-//     return (await ctx.db.query("users").collect()) as User[];
-//   },
-// });
-
-// Pobieranie wszystkich uzytkownikow (zaakceptowanych w znajomych uzytkownika)
-// export const getAcceptedFriends = query({
-//   args: {
-//     userId: v.string(),
-//   },
-//   handler: async (ctx, { userId }) => {
-//     return (await ctx.db
-//       .query("friends")
-//       .filter((q) => q.eq(q.field("userId"), userId))
-//       .filter((q) => q.eq(q.field("status"), "accepted"))
-//       .collect()) as Friends[];
-//   },
-// });
-
-// Przychodzace potwierdzenie uzytkownika na akceptacje do znajomych
-// export const getIncomingFriendRequests = query({
-//   args: {
-//     userId: v.string(),
-//   },
-//   handler: async (ctx, { userId }) => {
-//     // Zapytanie pobiera rekordy, gdzie zalogowany user jest odbiorcą (friendId) i status to "pending"
-//     const requests = await ctx.db
-//       .query("friends")
-//       .filter((q) => q.eq(q.field("friendId"), userId))
-//       .filter((q) => q.eq(q.field("status"), "pending"))
-//       .collect();
-
-//     return requests;
-//   },
-// });
-
+// OPCJA 2 - getUserProfile
 export const getUserProfile = query({
-  args: {
+  args: v.object({
     clerkId: v.string(),
-  },
+  }),
 
-  handler: async (ctx, { clerkId }) => {
-    return await ctx.db
+  handler: async (ctx, args) => {
+    const user = await ctx.db
       .query("users")
-      .withIndex("by_clerkId", (q) => q.eq("clerkId", clerkId))
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", args.clerkId))
       .unique();
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
   },
 });
 
-export const getAllUsers = query({
-  args: { clerkId: v.string() },
-  handler: async (ctx, { clerkId }) => {
-    const users = await ctx.db
-      .query("users")
-      .withIndex("by_clerkId", (q) => q)
-      .collect();
+// OPCJA 1 - getAllUsers
+// export const getAllUsers = query({
+//   args: { clerkId: v.string() },
+//   handler: async (ctx, { clerkId }) => {
+//     const users = await ctx.db
+//       .query("users")
+//       .withIndex("by_clerkId", (q) => q)
+//       .collect();
 
-    return users
-      .filter((user) => user.clerkId !== clerkId)
-      .map(({ clerkId, name, email, status }) => ({
-        clerkId,
-        name,
-        email,
-        status,
-      }));
+//     return users
+//       .filter((user) => user.clerkId !== clerkId)
+//       .map(({ clerkId, name, email, status }) => ({
+//         clerkId,
+//         name,
+//         email,
+//         status,
+//       }));
+//   },
+// });
+
+// OPCJA 2 - getAllUsers
+export const getAllUsers = query({
+  handler: async (ctx) => {
+    const users = await ctx.db.query("users").take(10);
+
+    return users;
   },
 });
