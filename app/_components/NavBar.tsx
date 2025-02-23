@@ -1,6 +1,6 @@
-import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
-import React from "react";
+import { auth } from "@clerk/nextjs/server";
+import AuthControls from "./AuthControls";
 
 export default async function NavBar() {
   const { userId } = await auth();
@@ -16,9 +16,12 @@ export default async function NavBar() {
 
         <Link href="/social/profile">Profile</Link>
         <Link href="/social/users">Users</Link>
-        <Link href="/social/messages">Messages</Link>
-        <Link href="/social/chat">Chat</Link>
+        {/* <Link href="/social/messages">Messages</Link> */}
+        {/* <Link href="/social/chat">Chat</Link> */}
       </nav>
+      <div className="ml-auto">
+        <AuthControls />
+      </div>
     </header>
   );
 }
