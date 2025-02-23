@@ -5,30 +5,24 @@ export default defineSchema({
   users: defineTable({
     clerkId: v.string(),
     name: v.string(),
-    email: v.string(),
-    country: v.string(),
-    age: v.number(),
-    description: v.string(),
-    status: v.union(v.literal("online"), v.literal("offline")),
-    lastActive: v.number(),
+    bio: v.optional(v.string()),
+    country: v.optional(v.string()),
+    age: v.optional(v.number()),
+    lastSeen: v.number(),
   })
-    .index("by_status", ["status"])
-    .index("by_lastActive", ["lastActive"])
-    .index("by_clerkId", ["clerkId"]),
+    .index("by_clerkId", ["clerkId"])
+    .index("by_lastSeen", ["lastSeen"]),
 
-  friends: defineTable({
-    userA: v.id("users"),
-    userB: v.id("users"),
+  invitations: defineTable({
+    senderId: v.string(),
+    recipientId: v.string(),
     status: v.union(
       v.literal("pending"),
       v.literal("accepted"),
-      v.literal("blocked"),
-      v.literal("removed")
+      v.literal("rejected")
     ),
     createdAt: v.number(),
-    deletedAt: v.optional(v.number()),
   })
-    .index("by_users", ["userA", "userB"])
-    .index("by_userB", ["userB", "status"])
-    .index("by_userA", ["userA", "status"]),
+    .index("by_senderId", ["senderId"])
+    .index("by_recipientId", ["recipientId"]),
 });

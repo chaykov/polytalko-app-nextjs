@@ -3,25 +3,24 @@
 Ten projekt to mini aplikacja społecznościowa oparta na: **Next.js 15 + Convex + Clerk**.
 Poniżej znajduje się **lista funkcji**, które planuję wdrożyć.
 
-✅ - ukończone funkcje.
 🚧 - w trakcie implementacji
 ⏳ - planowane
 
 ## 1. Autoryzacja i użytkownicy
 
-- [x] ✅ Logowanie i rejestracja użytkownika (Clerk)
-- [x] ✅ Pobieranie profilu użytkownika (imię, wiek, kraj, opis)
-- [x] ✅ Edycja profilu użytkownika
-- [x] ✅ System statusów: "online", "offline",
-- [ ] ⏳ Ostatnia aktywność użytkownika (np. "Ostatnio aktywny 10 min temu")
-- [x] ✅ Pobieranie wszystkich zarejestrowanych użytkowników
+- [x] Logowanie i rejestracja użytkownika (Clerk)
+- [x] Pobieranie profilu użytkownika (imię, wiek, kraj, opis)
+- [x] Edycja profilu użytkownika
+- [x] System statusów: "online", "offline",
+- [x] ⏳ Ostatnia aktywność użytkownika (np. "Ostatnio aktywny 10 min temu")
+- [x] Pobieranie wszystkich zarejestrowanych użytkowników
 
 ## 2. System znajomych
 
-- [x] ✅ Wysyłanie zaproszeń do znajomych
+- [x] Wysyłanie zaproszeń do znajomych
 - [ ] 🚧 Akceptowanie lub odrzucanie zaproszenia
-- [x] ✅ Cofanie zaproszenia przed jego zaakceptowaniem
-- [x] ✅ Licznik oczekujących zaproszeń w nawigacji obok zakładki "Profile"
+- [ ] Cofanie zaproszenia przed jego zaakceptowaniem
+- [ ] Licznik oczekujących zaproszeń w nawigacji obok zakładki "Profile"
 - [ ] 🚧 Usuwanie znajomych
 - [ ] 🚧 Blokowanie użytkowników
 - [ ] 🚧 Pobieranie listy znajomych w czasie rzeczywistym
