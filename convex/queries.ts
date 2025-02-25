@@ -54,19 +54,19 @@ export const checkFriendship = query({
 });
 
 export const checkPendingInvitation = query({
-  args: { senderId: v.string(), recipientId: v.string() },
+  args: { userId1: v.string(), userId2: v.string() },
   handler: async (ctx, args) => {
     const pending = await ctx.db
       .query("invitations")
       .filter((q) =>
         q.or(
           q.and(
-            q.eq(q.field("senderId"), args.senderId),
-            q.eq(q.field("recipientId"), args.recipientId)
+            q.eq(q.field("senderId"), args.userId1),
+            q.eq(q.field("recipientId"), args.userId2)
           ),
           q.and(
-            q.eq(q.field("senderId"), args.recipientId),
-            q.eq(q.field("recipientId"), args.senderId)
+            q.eq(q.field("senderId"), args.userId2),
+            q.eq(q.field("recipientId"), args.userId1)
           )
         )
       )
@@ -75,7 +75,7 @@ export const checkPendingInvitation = query({
 
     return {
       hasPending: !!pending,
-      isSender: pending ? pending.senderId === args.senderId : false,
+      isSender: pending ? pending.senderId === args.userId1 : false,
     };
   },
 });

@@ -1,4 +1,3 @@
-// app/social/profile/InvitationsSection.tsx
 "use client";
 
 import { useMutation, useQuery } from "convex/react";

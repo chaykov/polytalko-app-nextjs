@@ -1,3 +1,4 @@
+import InviteButton from "@/app/_components/InviteButton";
 import { api } from "@/convex/_generated/api";
 import { convexQuery } from "@/lib/convex-utils";
 import { auth } from "@clerk/nextjs/server";
@@ -7,7 +8,9 @@ import Link from "next/link";
 export default async function Users() {
   const { userId } = await auth();
 
-  if (!userId) return null;
+  if (!userId) {
+    return <p className="text-red-500">You are not logged in!</p>;
+  }
 
   await fetchMutation(api.mutations.updateUserStatus, {
     clerkId: userId,
@@ -30,29 +33,40 @@ export default async function Users() {
   }
 
   return (
-    <div className="">
-      <h1 className="text-2xl font-bold text-gray-900 mb-4">All users</h1>
-      <ul>
+    <div className="max-w-3xl mx-auto p-4">
+      <h1 className="text-2xl font-bold text-gray-900 mb-4">
+        Wszyscy użytkownicy
+      </h1>
+      <ul className="bg-white p-6 rounded-lg shadow-md space-y-4">
         {otherUsers.map((user) => (
-          <li key={user.clerkId} className="border p-2">
-            <div className="flex items-center py-2">
-              <p>{user.name}</p>
-              <span
-                className={`ml-2 w-3 h-3 rounded-full ${
-                  isOnline(user.lastSeen) ? "bg-green-500" : "bg-red-500"
-                }`}
-                title={isOnline(user.lastSeen) ? "Online" : "Offline"}
-              />
-              <span className="ml-1 text-sm text-gray-600">
-                {getStatusText(user.lastSeen)}
-              </span>
+          <li
+            key={user.clerkId}
+            className="border-b pb-2 flex justify-between items-center"
+          >
+            <div>
+              <div className="flex items-center">
+                <p className="text-gray-900 font-semibold">{user.name}</p>
+                <span
+                  className={`ml-2 w-3 h-3 rounded-full ${
+                    isOnline(user.lastSeen) ? "bg-green-500" : "bg-red-500"
+                  }`}
+                  title={isOnline(user.lastSeen) ? "Online" : "Offline"}
+                />
+                <span className="ml-1 text-sm text-gray-600">
+                  {getStatusText(user.lastSeen)}
+                </span>
+              </div>
+              <p className="text-gray-600">{user.bio || "Brak opisu"}</p>
+              <Link
+                href={`/social/profile?userId=${user.clerkId}`}
+                className="text-blue-500 hover:underline"
+              >
+                Zobacz profil
+              </Link>
             </div>
-            <Link
-              className="bg-blue-500 text-white py-1 px-2 hover:bg-blue-600 border mt-2"
-              href={`/social/profile?userId=${user.clerkId}`}
-            >
-              See profile
-            </Link>
+            {user.clerkId !== userId && (
+              <InviteButton senderId={userId} recipientId={user.clerkId} />
+            )}
           </li>
         ))}
       </ul>
