@@ -5,6 +5,8 @@ import { auth } from "@clerk/nextjs/server";
 import { fetchMutation } from "convex/nextjs";
 import Link from "next/link";
 
+export const revalidate = 300;
+
 export default async function ProfilePage({
   searchParams,
 }: {
