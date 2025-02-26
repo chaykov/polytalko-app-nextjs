@@ -1,11 +1,12 @@
+"use client";
+
 import Link from "next/link";
-import { auth } from "@clerk/nextjs/server";
+// import { SignOutButton } from "@clerk/nextjs";
+// import { useRouter } from "next/navigation";
 import AuthControls from "./AuthControls";
 
-export default async function NavBar() {
-  const { userId } = await auth();
-
-  console.log(userId);
+export default function NavBar() {
+  // const router = useRouter();
 
   return (
     <header className="flex py-4 shadow-sm bg-grey-800 px-8">
@@ -21,6 +22,14 @@ export default async function NavBar() {
       </nav>
       <div className="ml-auto">
         <AuthControls />
+        {/* <SignOutButton redirectUrl={"/"}>
+          <button
+            onClick={() => router.push("/")}
+            className="bg-white px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-xs hover:bg-indigo-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            Log out
+          </button>
+        </SignOutButton> */}
       </div>
     </header>
   );

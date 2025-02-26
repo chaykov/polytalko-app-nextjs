@@ -1,4 +1,4 @@
-import InvitationsSection from "@/app/_components/InvitationsSection";
+import InvitationsSection from "@/components/InvitationsSection";
 import { api } from "@/convex/_generated/api";
 import { convexQuery } from "@/lib/convex-utils";
 import { auth } from "@clerk/nextjs/server";

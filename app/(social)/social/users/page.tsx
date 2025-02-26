@@ -1,4 +1,4 @@
-import InviteButton from "@/app/_components/InviteButton";
+import InviteButton from "@/components/InviteButton";
 import { api } from "@/convex/_generated/api";
 import { convexQuery } from "@/lib/convex-utils";
 import { auth } from "@clerk/nextjs/server";
