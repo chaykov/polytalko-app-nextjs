@@ -8,7 +8,7 @@ export default function LandingPage() {
       <div className="flex items-center min-h-full justify-center flex-col">
         <div className="mx-auto max-w-2xl text-center p-6 sm:p-12">
           <h1 className="text-7xl md:text-[92px] font-bold text-white mb-12">
-            PolyTalko
+            PolyTalko Alpha v1.0 🚀
           </h1>
           <h2 className="text-balance font-semibold tracking-tight text-white text-4xl md:text-5xl">
             Get some new friends from all over the world.
